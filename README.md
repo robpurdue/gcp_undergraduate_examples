@@ -1,1 +1,1 @@
-# gcp_undergraduate_examples
+# Sample Undergraduate IT Projects for Google Cloud Platform

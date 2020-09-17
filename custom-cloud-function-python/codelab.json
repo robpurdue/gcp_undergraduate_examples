@@ -1,0 +1,26 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-09-17T15:08:58Z",
+  "id": "custom-cloud-function-python",
+  "duration": 0,
+  "title": "Creating a Custom Google Cloud Function",
+  "authors": "elliott",
+  "summary": "In this tutorial you'll create and deploy a simple Cloud Function on the Google Cloud Platform using your own Python code.",
+  "source": "18rvDrJXhSjzk3Kgash717gLZfxwoIFes2NDDB5ctEY8",
+  "theme": "gcp",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "GCP"
+  ],
+  "tags": [
+    "web"
+  ],
+  "feedback": "mailto:elliott@iupui.edu",
+  "ga": "UA-133580637-1",
+  "url": "custom-cloud-function-python"
+}

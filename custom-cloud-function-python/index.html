@@ -1,0 +1,271 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Creating a Custom Google Cloud Function</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="UA-133580637-1"
+                  id="custom-cloud-function-python"
+                  title="Creating a Custom Google Cloud Function"
+                  environment="web"
+                  feedback-link="mailto:elliott@iupui.edu">
+    
+      <google-codelab-step label="Introduction" duration="0">
+        <table>
+<tr><td colspan="1" rowspan="1"><p>This is a step-by-step guide that will walk you through the process of creating a Google Cloud Function using Python.</p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 186.50px" src="img/4f8d5421765ff422.png"></p>
+</td></tr>
+</table>
+<p><strong>Before you begin</strong> you should have an active project in the Google Cloud Platform.  The project must be attached to an active billing account.</p>
+<p>Instructors can apply for credit for students in their courses by visiting the <a href="https://edu.google.com/programs/faculty/" target="_blank">Google Cloud for Education website</a>.</p>
+<p>---</p>
+<p>This tutorial is authored by Rob Elliott, Senior Lecturer of Computer and Information Technology at IUPUI (<a href="mailto:elliott@iupui.edu" target="_blank">elliott@iupui.edu</a>).  The <a href="https://docs.google.com/document/d/18rvDrJXhSjzk3Kgash717gLZfxwoIFes2NDDB5ctEY8/edit?usp=sharing" target="_blank">original document is available as a Google Doc</a> and was converted to HTML using the <a href="https://github.com/googlecodelabs/tools" target="_blank">Google Codelab export tools</a>.</p>
+<p>The work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
+<p class="image-container"><img style="width: 88.00px" src="img/c19ec893507d67c9.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Overview" duration="0">
+        <p>Google Cloud Functions are discrete</p>
+<p>Cloud Functions are activated (or &#34;triggered&#34;) by a number of different events: HTTP requests, Pub/Sub notifications, or changes to Cloud Storage. The Cloud Functions in this tutorial will be activated by HTTP requests, which means they will respond when their URL is visited by a user via a web browser.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Step 1: Select Your Google Cloud Project" duration="0">
+        <p>Visit the Google Cloud Platform Console by going to <a href="https://console.cloud.google.com" target="_blank">https://console.cloud.google.com</a>.</p>
+<p><a href="https://console.cloud.google.com" target="_blank"><paper-button class="colored" raised>Open the Google Cloud Console</paper-button></a></p>
+<p>From the title bar at the top of the page, view the active project name.  If this is not the correct project, selecting the project name will open the project selection modal window.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/ed9ef8846f221215.png"></p>
+<p>Choose (or create) a project into which you will create a Cloud Function.  You should be returned to the Console home page with the selected project displayed in the title bar.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Step 2: Enable the Cloud Functions API" duration="0">
+        <h2 is-upgraded>Visit the Cloud Functions Console</h2>
+<p>The Cloud Functions page can be found from the main menu at the top left of any page in the Google Cloud Platform site.</p>
+<p>From the menu, scroll to the <strong>Compute</strong> section and then choose <strong>Cloud Functions</strong>.</p>
+<p class="image-container"><img style="width: 266.50px" src="img/22c8ed0b715af8d8.png"></p>
+<p>Selecting the thumbtack icon to the right of the Cloud Functions menu item will pin the Cloud Functions page to the top of your main menu.</p>
+<p>The first time you visit the Cloud Functions page, the API will be enabled for you.  This might take a few seconds.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Step 3: Create a ‘Hello World&#39; Cloud Function" duration="0">
+        <p>This tutorial will actually walk you through the process of creating two Cloud Functions: one that uses the default code provided by Google Cloud Platform, and a second with custom Python code.</p>
+<p>Choose the <strong>Create Function</strong> button on the page (the location of the button may be different than pictured, based on whether or not this is your first Cloud Function.)</p>
+<p class="image-container"><img style="width: 624.00px" src="img/6717f553eaf29aa3.png"></p>
+<h2 is-upgraded>Configure the Cloud Function</h2>
+<p>On the Configuration page, enter the <strong>Function name </strong><code>python-hello-world</code></p>
+<p>From the <strong>Region</strong> dropdown, choose the geographic region that is closest to your location.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/952e23d10ca3a967.png"></p>
+<h2 is-upgraded>Choose a Function Trigger</h2>
+<p>In this tutorial you will create functions that are triggered by HTTP requests.  This means that visitors will be able to invoke your function by visiting a URL in a web browser.  Ensure that <strong>HTTP</strong> is selected in the <strong>Trigger type</strong> dropdown menu.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/46520d8946c7d279.png"></p>
+<aside class="warning"><p><strong>Important!</strong>  Ensure that the automatically-generated URL includes your function&#39;s name.  If it does not, change the <strong>Trigger type</strong> selection to a different value and then change it again to <strong>HTTP</strong>.  This should reset the URL to include your function&#39;s name.</p>
+</aside>
+<h2 is-upgraded>Select Your Authentication Type</h2>
+<p>The functions in this tutorial should be made publicly available so that no authentication is needed during their invocation.  Choose <strong>Allow unauthenticated invocations</strong> from the Authentication menu.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/f9f8a12c7014e2b7.png"></p>
+<aside class="special"><p><strong>Free tier functionality!</strong>  You might be concerned about exposing your Cloud Function publicly, but do not panic.  Cloud Functions are not billed until they have run <strong>two million times</strong> in a single month.  Even then, current pricing for Cloud Functions is only USD $0.40 per <em>million</em> executions.</p>
+<p>If you&#39;re interested, you can read more about <a href="https://cloud.google.com/functions/pricing" target="_blank">Cloud Function pricing</a>.</p>
+</aside>
+<p>Choose <strong>Save</strong> and then click <strong>Next.</strong></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Step 4: Choose a Runtime" duration="0">
+        <p>Cloud Functions can be programmed in a variety of programming languages.  This tutorial uses Python (currently Python 3.7) for the function&#39;s source code.</p>
+<p>Choose your Runtime (Python 3.7) from the dropdown.<br><img style="width: 624.00px" src="img/c0fd2bdf901f1396.png"></p>
+<p class="image-container"><img style="width: 624.00px" src="img/541545d06d2af6ae.png"></p>
+<p>If this is the first function you&#39;ve created in this project, you will be asked to enable the Cloud Build API.  Select the <strong>Enable API</strong> button and then choose <strong>Enable</strong> on the page that appears.</p>
+<p>You may close the window for the Cloud Build API.</p>
+<h2 is-upgraded>Set the Entry Point</h2>
+<p>Your Cloud Function requires a specific Python function to run when the function is triggered.  By default, the function is named <code>hello_world</code>  You may leave the default in place.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/490797d2fa7f0676.png"></p>
+<h2 is-upgraded>Choose Your Source Code Location</h2>
+<p>Source code for a Cloud Function can be added from different locations (a .zip file or a Cloud Source repository.)  For this Cloud Function, you will use the inline editor to write your code.</p>
+<p>Ensure <strong>Inline Editor</strong> is selected in the <strong>Source code</strong> dropdown.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/c889ca4c91fd1e20.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Step 5: Examine the ‘Hello World&#39; Code" duration="0">
+        <p>We will use the default code provided in the <code>hello_world(request)</code> function.  Take a moment to read through the code to understand its functionality.</p>
+<p>This program uses the Python Flask web framework to examine the HTTP request.  It collects the JSON values in the request into a variable called <code>request_json</code></p>
+<p>The program then proceeds to examine the incoming arguments from the request to look for a specific argument named <code>message</code>.  If a value is found, the function returns that value.</p>
+<p>If no message is found in the arguments, the program looks for a key named <code>message</code> in the <code>request_json</code> variable.  If a value is found there, the function returns it.</p>
+<p>If no message is found in either the request arguments or the request&#39;s JSON, the function simply returns the string <code>‘Hello World&#39;</code></p>
+<p><code>main.py</code></p>
+<pre><code>def hello_world(request):
+    &#34;&#34;&#34;Responds to any HTTP request.
+    Args:
+        request (flask.Request): HTTP request object.
+    Returns:
+        The response text or any set of values that can be turned into a
+        Response object using
+        `make_response &lt;http://flask.pocoo.org/docs/1.0/api/#flask.Flask.make_response&gt;`.
+    &#34;&#34;&#34;
+    request_json = request.get_json()
+    if request.args and &#39;message&#39; in request.args:
+        return request.args.get(&#39;message&#39;)
+    elif request_json and &#39;message&#39; in request_json:
+        return request_json[&#39;message&#39;]
+    else:
+        return f&#39;Hello World!&#39;</code></pre>
+<p>Now that you have reviewed the code, it&#39;s time to deploy our function!</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Step 6: Deploy the ‘Hello World&#39; Cloud Function" duration="0">
+        <p>Deploy the function by selecting the <strong>Deploy</strong> button at the bottom of the window.  Deploying the function does the following:</p>
+<ul>
+<li>Begins the build process that assembles and validates your code</li>
+<li>Deploys the Cloud Function to a virtual server where it can be invoked through a web browser</li>
+</ul>
+<p>The deployment process may take a few moments (especially if this is the first time a Cloud Function has been deployed.)  When the process is complete, you should see a success icon next to the Cloud Function&#39;s name in the list of functions.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/1ddaeb72841b713f.png"></p>
+<aside class="warning"><p><strong>Error alert!</strong>  If you see an error about incorrect permissions, ensure you have selected the <strong>Enable API</strong> button to enable the Cloud Build API!</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Step 7: Invoke the ‘Hello World&#39; Cloud Function" duration="0">
+        <p>From the list of Cloud Functions, select the name of the Cloud Function to be taken to the Function details screen.</p>
+<p>On the Function details screen, choose the tab labeled <strong>Trigger</strong>.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/d69db776dde44ffc.png"></p>
+<p>Because this is a Cloud Function triggered by an HTTP call, the screen will show a URL that will activate your Cloud Function.  Select the link provided on the page to run your Cloud Function.</p>
+<p>A new window or tab will open that will produce the &#34;Hello World!&#34; output from your source code.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/38e0d62884792f2.png"></p>
+<p>If you see this message in your browser, you have successfully invoked your first Cloud Function!</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Step 8: Customize the ‘Hello World&#39; Cloud Function" duration="0">
+        <p>Return to the window or tab that shows the Function details for your Cloud Function.  Choose the <strong>Edit</strong> link near the top of the page to edit the logic of your function.</p>
+<p>The Configuration screen allows you to update the name of the Cloud Function and/or its URL for invocation.  You do not need to make any changes on this screen, so choose <strong>Next</strong>.</p>
+<p>You are now presented with the Inline Editor and the original source code of the function.</p>
+<p>Update the default return value from the function to customize the message to something other than &#34;Hello World!&#34;</p>
+<p>When you have made your updates, select the <strong>Deploy</strong> button toward the bottom of the window.  This will initiate the build process and re-deploy your function.  The process will take a few seconds to complete.</p>
+<p>If there are no errors in your source code and no issues with deployment you should again see the success icon next to the Cloud Function&#39;s name.</p>
+<p>Test your function again by selecting the name of the Cloud Function, visiting the <strong>Trigger</strong> tab, and selecting the provided URL.  The output of the Cloud Function should now match the edits you made to the source code.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/d8120ef6da16c239.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Step 9: Create a ‘Pirate Name Generator&#39; Cloud Function" duration="0">
+        <p>You will now repeat steps 2-7 to create a new Cloud Function.  This function will use Python code to collect input from the user (via the querystring) and return a custom pirate name based on the initials provided in the input.</p>
+<h2 is-upgraded>Create a Cloud Function</h2>
+<p>Create a new Google Cloud Function with the following values:</p>
+<ul>
+<li><strong>Function name: </strong><code>pirate_name_generator</code></li>
+<li><strong>Region: </strong><em>Choose the region closest to you</em></li>
+<li><strong>Trigger type:</strong> HTTP</li>
+<li><strong>URL: </strong><em>Ensure the URL includes the Function name.  If not, select a different trigger and then re-select HTTP</em></li>
+<li><strong>Authentication:</strong> Allow unauthenticated invocations</li>
+<li><strong>Runtime:</strong> Python 3.7</li>
+<li><strong>Entry point: </strong><code>main</code></li>
+<li><strong>Source code:</strong> Inline Editor</li>
+</ul>
+<h2 is-upgraded>Add Source Code to the Cloud Function</h2>
+<p>Select the <strong>Edit</strong> button or pencil icon next to the <code>main.py</code> file in the Inline Editor.</p>
+<p>Select and delete all of the code that was automatically created.  Replace the code with the following (simply copy and paste):</p>
+<p><code>main.py</code></p>
+<pre><code>first_names = [&#34;Lady&#34;, &#34;Dirty&#34;, &#34;Squidlips&#34;, &#34;Bowman&#34;, &#34;Buccaneer&#34;, &#34;Two Toes&#34;, &#34;Sharkbait&#34;, &#34;Old&#34;, &#34;Peg Leg&#34;, &#34;Fluffbucket&#34;, &#34;Scallywag&#34;, &#34;Bucko&#34;, &#34;Dead Man&#34;, &#34;Matey&#34;, &#34;Jolly&#34;, &#34;Stinky&#34;, &#34;Bloody&#34;, &#34;Mad&#34;, &#34;Miss&#34;, &#34;Red&#34;, &#34;Captain&#34;, &#34;Bretheren&#34;, &#34;Rapscallion&#34;, &#34;Landlubber&#34;, &#34;Wench&#34;, &#34;Freebooter&#34;]
+
+middle_names = [&#34;Creeper&#34;, &#34;Jim&#34;, &#34;Storm&#34;, &#34;Scruff&#34;, &#34;Legs&#34;, &#34;O&#39;&#34;, &#34;Rat&#34;, &#34;Jack&#34;, &#34;George&#34;, &#34;Head&#34;, &#34;Cackle&#34;, &#34;Patch&#34;, &#34;Bones&#34;, &#34;Plank&#34;, &#34;Greedy&#34;, &#34;Sea&#34;, &#34;Mama&#34;, &#34;Spike&#34;, &#34;Squiffy&#34;, &#34;Gold&#34;, &#34;Yellow&#34;, &#34;Felony&#34;, &#34;Eddit&#34;, &#34;Bay&#34;, &#34;Thomas&#34;, &#34;Spot&#34;]
+
+last_names = [&#34;Magoo&#34;, &#34;Byrd&#34;, &#34;Jackson&#34;, &#34;Sparrow&#34;, &#34;McCracken&#34;, &#34;Jones&#34;, &#34;Ned Head&#34;, &#34;Bar&#34;, &#34;O&#39;Fish&#34;, &#34;Kidd&#34;, &#34;O&#39;Malley&#34;, &#34;Barnacle&#34;, &#34;Holystone&#34;, &#34;Hornswaggle&#34;, &#34;McStinky&#34;, &#34;Swashbuckler&#34;, &#34;Sea Wolf&#34;, &#34;Beard&#34;, &#34;Chumbucket&#34;, &#34;Rivers&#34;, &#34;Morgan&#34;, &#34;Tuna Breath&#34;, &#34;Three Gates&#34;, &#34;Bailey&#34;, &#34;the Wrangler&#34;, &#34;Of Dark Water&#34;]
+
+alpha = &#34;abcdefghijklmnopqrstuvwxyz&#34;
+
+def main(request):
+    &#34;&#34;&#34;Responds to any HTTP request.
+    Args:
+        request (flask.Request): HTTP request object.
+    Returns:
+        The response text or any set of values that can be turned into a
+        Response object using
+        `make_response &lt;http://flask.pocoo.org/docs/1.0/api/#flask.Flask.make_response&gt;`.
+    &#34;&#34;&#34;
+    request_json = request.get_json()
+    if request.args and &#39;first&#39; in request.args and &#39;middle&#39; in request.args and &#39;last&#39; in request.args:
+        first = name_lookup(request.args[&#39;first&#39;], first_names)
+        middle = name_lookup(request.args[&#39;middle&#39;], middle_names)
+        last = name_lookup(request.args[&#39;last&#39;], last_names)
+        return f&#39;Your pirate name is {first} {middle} {last}.&#39; 
+    else:
+        return f&#39;We couldn\&#39;t determine your name from the inputs provided. {request.args}&#39;
+
+def name_lookup(input, list):
+    initial = input[0].lower()
+    initial_position = alpha.find(initial)
+    name_part = list[initial_position]
+    return name_part</code></pre>
+<p>Once the above code is pasted into the Inline Editor, choose <strong>Deploy</strong>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Step 10: Invoke the ‘Pirate Name Generator&#39; Cloud Function" duration="0">
+        <p>The code provided to you expects <em>three</em> inputs from the user.  Any other amount of input will cause the cloud function to fail and provide a user-friendly error message through the browser.</p>
+<p>To provide the user inputs, you will manually append a querystring when calling the cloud function.   </p>
+<p>To invoke the cloud function, open the URL provided in the <strong>Trigger</strong> tab.  Then copy the following querystring and append it to the end of the URL in the browser:</p>
+<pre><code>?first=beth&amp;middle=sharon&amp;last=lang</code></pre>
+<p>With the URL and querystring together, invoke the cloud function by visiting the URL.  The output from the cloud function should read <em>Your pirate name is Dirty Squiffy Barnacle.</em></p>
+<p>Adjust the values in the querystring and test a variety of names.  Ensure you keep the key-value pairs intact: your querystring must include exactly three elements, named <code>first</code>, <code>middle</code>, and <code>last</code>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="What&#39;s Next?" duration="0">
+        <p>Congratulations!  You&#39;ve created two Google Cloud Functions.</p>
+<p>The Pirate Name Generator could use some work.  Consider making any (or all) of the following improvements:</p>
+<ul>
+<li>Add error handling to ensure that all of the values in the querystring begin with alphabetic characters (including a numeric querystring value will cause an error.)</li>
+<li>Adjust the code to allow just a first and last name.  If no middle name is provided, use the first letter of the first name, the last letter of the first name, and the first letter of the last name.</li>
+<li>Update the responses from the cloud function to sound more pirate-y!</li>
+</ul>
+<p>Whatever you do to improve this cloud function, you now have the ability to write programs that can accomplish countless tasks.  You can perform calculations, rename files, send notifications or emails, query data sources - the list is virtually endless.</p>
+<h2 is-upgraded>Integration with Other Cloud Functionality</h2>
+<p>Cloud Functions are most powerful when combined with other cloud technologies.  If you&#39;re new to cloud development a good place to continue your journey is to explore the possibilities of <a href="https://cloud.google.com/storage" target="_blank">Google Cloud Storage</a>.  Cloud Functions can be invoked by changes to Cloud Storage buckets, so you can write a program that alerts you when a new file is uploaded, for example.</p>
+<p>For a bit more advanced functionality, consider reading more about <a href="https://cloud.google.com/pubsub" target="_blank">Google Cloud Pub/Sub</a>, which is a service that allows other services to communicate on-demand.  A simple example of this might be to send messages to a chat application.  More powerful processes include data processing and validation, push notifications, and traffic analysis.</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

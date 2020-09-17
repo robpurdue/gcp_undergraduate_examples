@@ -1,0 +1,125 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Creating a GCP Project</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="UA-133580637-1"
+                  id="creating-gcp-project"
+                  title="Creating a GCP Project"
+                  environment="web"
+                  feedback-link="mailto:elliott@iupui.edu">
+    
+      <google-codelab-step label="Introduction" duration="0">
+        <table>
+<tr><td colspan="1" rowspan="1"><p>This tutorial will guide you through the process of creating a new project in the Google Cloud Platform. <strong>Before you begin</strong> you should ensure that you have an active billing account.  Instructions for verifying your billing account are included in this tutorial.</p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 186.50px" src="img/4f8d5421765ff422.png"></p>
+</td></tr>
+</table>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Overview: Projects in Google Cloud Platform" duration="0">
+        <p>In the Google Cloud Platform (GCP), individual applications are often divided into <strong>projects.</strong>  A project can incorporate any number of individual cloud services (Storage, Compute Engine, etc.)</p>
+<p>A <strong>project</strong> is associated with one <strong>billing account</strong>.  All of the costs for all of the cloud services within this project will be charged to the billing account.</p>
+<p>A billing account can support up to ten individual GCP projects.</p>
+<p>If you are using the Google Cloud Platform in a course, you will likely have a single billing account that provides credit for all of the projects in that course.  Your instructor will inform you when you need to create a new, separate project.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Step 1: Verify Your Billing Account" duration="0">
+        <p>Before you create a project in the Google Cloud Platform (GCP), you <em>must</em> ensure that you have an active billing account with a specific payment source (either educational credits or an associated credit card.)</p>
+<aside class="warning"><p><strong>IMPORTANT!</strong></p>
+<p>Students are <strong>never</strong> expected to enter credit card information into Google Cloud Platform.  Course-related billing accounts should never ask for credit card information.</p>
+<p>If you find yourself at a point where you must enter a credit card to continue, <strong>STOP </strong>and contact the instructor.</p>
+</aside>
+<p>To verify your billing account is active, do the following:</p>
+<ol type="1" start="1">
+<li>Visit the <a href="https://console.cloud.google.com" target="_blank">Google Cloud Console</a> and ensure you are logged in with the email address you used when creating the billing account <em>(this is most likely your university email address.)</em></li>
+<li>Once you have loaded the Console, choose Billing from the primary navigation located in the dropdown at the top left.</li>
+<li>If you are in an active GCP project, you will be directed to choose the current billing account.  To see all of your accounts choose <strong>Manage billing accounts.</strong></li>
+</ol>
+<p class="image-container"><img style="width: 328.50px" src="img/32c24f075c0e12b9.png"><br></p>
+<ol type="1" start="4">
+<li>By default, the Billing page will only show active accounts.  You should have at least one active account listed.</li>
+<li>To see all of your billing accounts, select &#34;Show all accounts&#34; from the dropdown at the top of the list.</li>
+<li>Selecting one of the billing account names will take you to the overview page for that billing account.</li>
+<li>Billing accounts with educational credits should show the remaining credit balance on the account Overview page.</li>
+</ol>
+<p class="image-container"><img style="width: 320.50px" src="img/33137917b116fe56.png"></p>
+<p>Once you have confirmed that you have an active billing account that has credits remaining, you can continue.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Step 2: Locate the New Project Page" duration="0">
+        <p>Believe it or not, it can be tricky to find the New Project Page.  You can get to it from multiple screens within the Google Cloud Console.  </p>
+<h2 is-upgraded>From the Project List</h2>
+<p>If you see a project name in the title bar of the Console, select the current project name.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/7b6a9e2d6873a919.png"></p>
+<p>This should bring up the project list, which contains a button to create a New Project.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/ebc397a940bf2d6e.png"></p>
+<h2 is-upgraded>From the Cloud Console</h2>
+<p>Occasionally, the Console does not show the current project in the title bar.  If this is the case, select the Google Cloud Platform logo.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/4b00daae938535d9.png"></p>
+<p>You should see a screen that lists recent projects and also contains a <strong>Create Project</strong> button.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/d5d0b61e297758f6.png"></p>
+<p>Once you have found and selected either the <strong>New Project</strong> or <strong>Create Project</strong> button, continue to the next step.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Step 3: Create a New Project" duration="0">
+        <p>The New Project page allows you to create a new GCP project.  </p>
+<p class="image-container"><img style="width: 471.91px" src="img/ab110bc1d58d5a5e.png"></p>
+<h2 is-upgraded>Project Name</h2>
+<p>You must provide a <strong>Project name</strong> that is <em>globally unique</em>.  </p>
+<p>Depending on how many projects you will have, consider adding specific information such as your course number and your username into the project name.  <strong>This will save you and your instructor considerable time in the future.</strong></p>
+<p>For example, you might consider a name along the lines of <strong>37400-username-bigdata</strong> where &#34;username&#34; is your unique university username.</p>
+<p>Once selected, you <strong>cannot</strong> change the name of your project.</p>
+<h2 is-upgraded>Billing Account</h2>
+<p>Select a billing account from the dropdown.  Only active billing accounts are shown.  If there are no active billing accounts, contact your instructor.</p>
+<h2 is-upgraded>Organization</h2>
+<p>You may or may not see an Organization drop down.  If you do, please leave it at the default value.</p>
+<p>Once all of your information has been input, select the <strong>CREATE</strong> button.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Step 4: Review your Dashboard" duration="0">
+        <p>After a few moments your project will be created and you will be delivered to the Dashboard page.</p>
+<p>No cloud services are started automatically when the project is created.  Use the global navigation menu at the top left to select the specific cloud service that you wish to enable for this project.</p>
+<p>You can enable as many cloud services as required.  Some services only charge your billing account when they are used (Cloud Functions, for example.)  Other services begin billing right away (such as a running Cloud Engine virtual machine.)</p>
+<p>You should be directed to specific services by your instructor.  If you can see the dashboard page for your project, you are ready to begin.</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

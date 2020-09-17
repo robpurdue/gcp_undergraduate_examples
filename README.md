@@ -7,11 +7,14 @@ These projects have been authored by Rob Elliott, IUPUI ([elliott@iupui.edu](mai
 
 ## Content Organized by Google Cloud Product
 
-### Compute Engine
-* [Raspberry Pi and GCP](Raspberry-Pi-and-GCP)
+### General Setup
+* [Creating a GCP Project](creating-gcp-project)
 
 ### Cloud Functions
 * [Creating a Custom Python Cloud Function](custom-cloud-function-python)
 
-### Docker and Kubernetes and Dataproc on GCP
+### Compute Engine
+* [Raspberry Pi and GCP](Raspberry-Pi-and-GCP)
+
+### Docker and Kubernetes in GCP
 * [Some labs material for Docker, Kubernetes and Dataproc using GCP (in Spanish language)  ](UEM-GCP-Spanish)

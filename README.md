@@ -8,13 +8,13 @@ These projects have been authored by Rob Elliott, IUPUI ([elliott@iupui.edu](mai
 ## Content Organized by Google Cloud Product
 
 ### General Setup
-* Creating a GCP Project
+* [Creating a GCP Project](creating-gcp-project)
 
 ### Cloud Functions
-* Creating a Custom Python Cloud Function
+* [Creating a Custom Python Cloud Function](custom-cloud-function-python)
 
 ### Compute Engine
-* Raspberry Pi and GCP
+* [Raspberry Pi and GCP](Raspberry-Pi-and-GCP)
 
 ### Docker and Kubernetes in GCP
-* UEM_GCP_Spanish (Some material for labs. using Docker and Kubernetes on GCP (Spanish))
+* [Some labs material for Docker, Kubernetes and Dataproc using GCP (in Spanish language)  ](UEM-GCP-Spanish)

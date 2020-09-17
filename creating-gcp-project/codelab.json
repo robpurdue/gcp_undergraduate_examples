@@ -1,0 +1,26 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-09-17T16:49:39Z",
+  "id": "creating-gcp-project",
+  "duration": 0,
+  "title": "Creating a GCP Project",
+  "authors": "elliott",
+  "summary": "In this tutorial you'll create a new project on the Google Cloud Platform and attach it to an existing billing account.",
+  "source": "1gSVOn7kV94HsV3gZYk9bb3UMsdZru7SaMdL2KexggGc",
+  "theme": "gcp",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "GCP"
+  ],
+  "tags": [
+    "web"
+  ],
+  "feedback": "mailto:elliott@iupui.edu",
+  "ga": "UA-133580637-1",
+  "url": "creating-gcp-project"
+}

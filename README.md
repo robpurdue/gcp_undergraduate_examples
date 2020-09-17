@@ -8,7 +8,7 @@ These projects have been authored by Rob Elliott, IUPUI ([elliott@iupui.edu](mai
 ## Content Organized by Google Cloud Product
 
 ### Compute Engine
-* [Raspberry Pi and GCP](tree/master/Raspberry-Pi-and-GCP)
+* [Raspberry Pi and GCP](Raspberry-Pi-and-GCP)
 
 ### Cloud Functions
-* [Creating a Custom Python Cloud Function](tree/master/custom-cloud-function-python)
+* [Creating a Custom Python Cloud Function](custom-cloud-function-python)

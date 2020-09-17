@@ -14,4 +14,4 @@ These projects have been authored by Rob Elliott, IUPUI ([elliott@iupui.edu](mai
 * [Creating a Custom Python Cloud Function](custom-cloud-function-python)
 
 ### Docker and Kubernetes in GCP
-* [UEM_GCP_Spanish](Some material for labs. using Docker and Kubernetes on GCP (Spanish))
+* [Some labs material for Docker and Kubernetes using GCP (in Spanish language)  ](UEM-GCP-Spanish)

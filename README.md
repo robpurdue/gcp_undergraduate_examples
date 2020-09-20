@@ -18,3 +18,4 @@ These projects have been authored by Rob Elliott, IUPUI ([elliott@iupui.edu](mai
 
 ### Docker and Kubernetes in GCP
 * [Some labs material for Docker, Kubernetes and Dataproc using GCP (in Spanish language)  ](UEM-GCP-Spanish)
+* [Workshop on Docker and Kubernetes using Terraform and GCP (Brian Anstett)](https://github.com/briananstett/k8-presentation)
